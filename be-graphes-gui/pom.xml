@@ -70,13 +70,6 @@
 		<!-- https://mvnrepository.com/artifact/org.mapsforge/mapsforge-map-reader -->
 		<dependency>
 			<groupId>org.mapsforge</groupId>
-			<artifactId>mapsforge-themes</artifactId>
-			<version>${mapsforge.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.mapsforge/mapsforge-map-reader -->
-		<dependency>
-			<groupId>org.mapsforge</groupId>
 			<artifactId>mapsforge-map-reader</artifactId>
 			<version>${mapsforge.version}</version>
 		</dependency>
