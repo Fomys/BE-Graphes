@@ -1,5 +1,8 @@
 package org.insa.graphs.gui.simple;
-
+/*
+ * Louis Chauvet
+ * 24/03/2021
+ */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedInputStream;
