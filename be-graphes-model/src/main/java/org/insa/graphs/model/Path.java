@@ -240,8 +240,11 @@ public class Path {
      * @return true if the path is valid, false otherwise.
      */
     public boolean isValid() {
-        if(this.arcs.size() == 0) {
+        if(this.arcs.size() <= 0) {
             return true;
+        }
+        if(this.arcs.get(0).getOrigin() != this.origin) {
+            return false;
         }
         for (int i = 0;i < this.arcs.size() - 1; i++) {
             if(this.arcs.get(i).getDestination().getId() != this.arcs.get(i+1).getOrigin().getId()) {
