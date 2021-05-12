@@ -24,7 +24,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
      */
     public BinaryHeap() {
         this.currentSize = 0;
-        this.array = new ArrayList<E>();
+        this.array = new ArrayList<>();
     }
 
     /**
@@ -34,7 +34,17 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
      */
     public BinaryHeap(BinaryHeap<E> heap) {
         this.currentSize = heap.currentSize;
-        this.array = new ArrayList<E>(heap.array);
+        this.array = new ArrayList<>(heap.array);
+    }
+
+    public boolean isValid() {
+        for (int i = 0; i < this.currentSize; i++) {
+            if(this.indexLeft(i) < this.currentSize && this.array.get(this.indexLeft(i)).compareTo(this.array.get(i)) < 0)
+                return false;
+            if(this.indexLeft(i) + 1 < this.currentSize && this.array.get(this.indexLeft(i)+1).compareTo(this.array.get(i)) < 0)
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -139,7 +149,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.currentSize--;
         E last = this.array.get(this.currentSize);
         this.array.set(index, last);
-        this.array.remove(this.currentSize);
+        //this.array.remove(this.currentSize);
         this.percolateDown(index);
         if(index < this.currentSize){
             this.percolateUp(index);
@@ -150,12 +160,12 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     public void remove(E x) throws ElementNotFoundException {
         if(isEmpty())
             throw new ElementNotFoundException(x);
-        if(x.compareTo(this.array.get(0)) < 0)
-            throw new ElementNotFoundException(x);
 
-        int i = 0;
+        /*if(x.compareTo(this.array.get(0)) < 0)
+            throw new ElementNotFoundException(x);*/
+
         int index = this.array.indexOf(x);
-        if(index >= 0) {
+        if(index >= 0 && index < this.currentSize) {
             this.remove_index(index);
         } else {
             throw new ElementNotFoundException(x);

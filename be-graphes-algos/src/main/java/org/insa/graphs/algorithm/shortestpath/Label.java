@@ -7,7 +7,7 @@ public class Label implements Comparable<Label> {
     private final Node sommet;
     private Arc arc;
 
-    private float cost;
+    private double cost;
     private boolean finished;
 
     public Label(Node sommet) {
@@ -17,20 +17,24 @@ public class Label implements Comparable<Label> {
         this.finished = false;
     }
 
-    public Label(Node sommet, float cost) {
+    public Label(Node sommet, double cost) {
         this.sommet = sommet;
         this.cost = cost;
         this.arc = null;
         this.finished = false;
     }
 
-    public float getCost() {
+    public double getCost() {
+        return this.cost;
+    }
+
+    public double getTotalCost() {
         return this.cost;
     }
 
     @Override
     public int compareTo(Label label) {
-        return this.cost - label.getCost() > 0 ? 1 : -1;
+        return this.getTotalCost() - label.getTotalCost() > 0 ? 1 : -1;
     }
 
     public Node getNode() {
@@ -41,7 +45,7 @@ public class Label implements Comparable<Label> {
         return this.finished;
     }
 
-    public void setCost(float cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
