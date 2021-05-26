@@ -38,11 +38,14 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     }
 
     public boolean isValid() {
-        for (int i = 0; i < this.currentSize; i++) {
-            if(this.indexLeft(i) < this.currentSize && this.array.get(this.indexLeft(i)).compareTo(this.array.get(i)) < 0)
+        if(this.isEmpty()) {
+            return true;
+        }
+        for (int i = 1; i < this.currentSize; i++) {
+            if(this.array.get(i).compareTo(this.array.get(this.indexParent(i))) < 0) {
+                System.out.println("Tas invalide: " + this.array.get(i).compareTo(this.array.get(this.indexParent(i))) + this.array.get(i) + " / " + this.array.get(this.indexParent(i)));
                 return false;
-            if(this.indexLeft(i) + 1 < this.currentSize && this.array.get(this.indexLeft(i)+1).compareTo(this.array.get(i)) < 0)
-                return false;
+            }
         }
         return true;
     }
@@ -149,16 +152,20 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.currentSize--;
         E last = this.array.get(this.currentSize);
         this.array.set(index, last);
-        //this.array.remove(this.currentSize);
         this.percolateDown(index);
         if(index < this.currentSize){
             this.percolateUp(index);
         }
     }
 
+    public void tryremove(E x) {
+        try { remove(x); }
+        catch (ElementNotFoundException ignored) {}
+    }
+
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        if(isEmpty())
+        if(this.isEmpty())
             throw new ElementNotFoundException(x);
 
         /*if(x.compareTo(this.array.get(0)) < 0)

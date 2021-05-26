@@ -3,12 +3,15 @@ package org.insa.graphs.algorithm.shortestpath;
 import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.AbstractSolution;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
+import org.insa.graphs.algorithm.utils.BinaryHeapFormatter;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Path;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static jdk.nashorn.internal.objects.Global.Infinity;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -45,7 +48,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         while (!heap.isEmpty()) {
             if(!heap.isValid()) {
-                break;
+                System.out.println("Terminé par tas invalide!");
+                //break;
             }
             Label nearest = heap.deleteMin();
             nearest.setFinished(true);
@@ -56,18 +60,18 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             for (Arc arc :
                     nearest.getNode().getSuccessors()) {
+                if(this.data.getCost(arc) <= 0) {System.out.println("Arc négatif: " + arc + " / " + this.data.getCost(arc));}
                 if (this.data.isAllowed(arc)) {
                     notifyNodeReached(arc.getDestination());
                     Label dest_label = labels.get(arc.getDestination());
 
                     if (!dest_label.isFinished()) {
                         if (dest_label.getCost() > nearest.getCost() + this.data.getCost(arc)) {
-
-                            dest_label.setCost(nearest.getCost() + this.data.getCost(arc));
-
                             if (dest_label.getArc() != null) {
                                 heap.remove(dest_label);
                             }
+
+                            dest_label.setCost(nearest.getCost() + this.data.getCost(arc));
 
                             heap.insert(dest_label);
                             dest_label.setArc(arc);

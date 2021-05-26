@@ -34,7 +34,11 @@ public class Label implements Comparable<Label> {
 
     @Override
     public int compareTo(Label label) {
-        return this.getTotalCost() - label.getTotalCost() > 0 ? 1 : -1;
+        double diff = this.getTotalCost() - label.getTotalCost();
+        if (diff == 0) {
+            return 0;
+        }
+        return diff > 0 ? 1 : -1;
     }
 
     public Node getNode() {
@@ -59,5 +63,15 @@ public class Label implements Comparable<Label> {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    @Override
+    public String toString() {
+        return "Label{" +
+                "sommet=" + sommet +
+                ", arc=" + arc +
+                ", cost=" + cost +
+                ", finished=" + finished +
+                '}';
     }
 }
