@@ -28,7 +28,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         final ShortestPathData data = getInputData();
 
         if (data.getOrigin() == data.getDestination()) {
-            return new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(data.getGraph(), data.getOrigin()));
+            return new ShortestPathSolution(data, AbstractSolution.Status.INFEASIBLE);
         }
 
         notifyOriginProcessed(data.getOrigin());
@@ -47,10 +47,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         AbstractInputData.Mode mode = data.getMode();
 
         while (!heap.isEmpty()) {
-            if(!heap.isValid()) {
-                System.out.println("Terminé par tas invalide!");
-                //break;
-            }
             Label nearest = heap.deleteMin();
             nearest.setFinished(true);
             notifyNodeMarked(nearest.getNode());
@@ -60,7 +56,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             for (Arc arc :
                     nearest.getNode().getSuccessors()) {
-                if(this.data.getCost(arc) <= 0) {System.out.println("Arc négatif: " + arc + " / " + this.data.getCost(arc));}
+                //if(this.data.getCost(arc) <= 0) {System.out.println("Arc négatif: " + arc + " / " + this.data.getCost(arc));}
                 if (this.data.isAllowed(arc)) {
                     notifyNodeReached(arc.getDestination());
                     Label dest_label = labels.get(arc.getDestination());

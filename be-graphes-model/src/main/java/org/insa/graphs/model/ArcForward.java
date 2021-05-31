@@ -65,4 +65,11 @@ class ArcForward extends Arc {
         return Collections.unmodifiableList(points);
     }
 
+    @Override
+    public String toString() {
+        return "ArcForward{" +
+                "origin=" + origin +
+                ", destination=" + destination+
+                '}';
+    }
 }

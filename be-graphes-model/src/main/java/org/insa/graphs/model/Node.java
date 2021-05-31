@@ -156,4 +156,10 @@ public final class Node implements Comparable<Node> {
         return Integer.compare(getId(), other.getId());
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "id=" + id +
+                '}';
+    }
 }

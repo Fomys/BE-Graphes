@@ -28,17 +28,15 @@ public class Label implements Comparable<Label> {
         return this.cost;
     }
 
+    public double getEstimatedCost() {return 0.0f;}
+
     public double getTotalCost() {
-        return this.cost;
+        return this.getCost() + this.getEstimatedCost();
     }
 
     @Override
     public int compareTo(Label label) {
-        double diff = this.getTotalCost() - label.getTotalCost();
-        if (diff == 0) {
-            return 0;
-        }
-        return diff > 0 ? 1 : -1;
+        return Double.compare(this.getTotalCost(), label.getTotalCost());
     }
 
     public Node getNode() {

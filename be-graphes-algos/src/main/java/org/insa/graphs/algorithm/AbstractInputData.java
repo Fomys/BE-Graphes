@@ -3,6 +3,7 @@ package org.insa.graphs.algorithm;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.GraphStatistics;
+import org.insa.graphs.model.Path;
 
 /**
  * Base class for algorithm input data classes. This class contains the basic
@@ -57,6 +58,22 @@ public abstract class AbstractInputData {
      */
     public double getCost(Arc arc) {
         return this.arcInspector.getCost(arc);
+    }
+
+    /**
+     * Compute total cost for a given path according to the underlying
+     * arc insepctor
+     * @param path Path for which cost should be retreived.
+     *
+     * @return Cost for the given path
+     */
+    public double getCost(Path path) {
+        double cost = 0.0f;
+        for (Arc arc :
+                path.getArcs()) {
+            cost += this.arcInspector.getCost(arc);
+        }
+        return cost;
     }
 
     /**

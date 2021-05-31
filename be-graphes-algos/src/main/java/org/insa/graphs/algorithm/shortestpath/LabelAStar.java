@@ -15,7 +15,15 @@ public class LabelAStar extends Label {
     }
 
     @Override
-    public double getTotalCost() {
-        return super.getCost() + this.estimated_cost;
+    public double getEstimatedCost() {return this.estimated_cost;}
+
+    @Override
+    public int compareTo(Label label) {
+        int value = Double.compare(this.getTotalCost(), label.getTotalCost());
+        if (value == 0) {
+            return Double.compare(this.getEstimatedCost(), label.getEstimatedCost());
+        }else {
+            return value;
+        }
     }
 }

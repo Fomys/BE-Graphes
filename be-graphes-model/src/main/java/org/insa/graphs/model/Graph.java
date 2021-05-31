@@ -3,6 +3,7 @@ package org.insa.graphs.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -128,4 +129,17 @@ public final class Graph {
                 getMapId(), getMapName(), size());
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Graph graph = (Graph) o;
+        return Objects.equals(getMapId(), graph.getMapId()) && Objects.equals(getMapName(), graph.getMapName()) && Objects.equals(getNodes(), graph.getNodes()) && Objects.equals(graphStatistics, graph.graphStatistics);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMapId(), getMapName(), getNodes(), graphStatistics);
+    }
 }

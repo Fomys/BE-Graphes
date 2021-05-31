@@ -63,7 +63,7 @@ public class BasicDrawing extends JPanel implements Drawing {
         }
 
         /**
-         * @return The Z level of this overlay (>= 1).
+         * @return The Z level of this overlay (&lt;= 1).
          */
         public abstract int getZLevel();
 
@@ -579,6 +579,7 @@ public class BasicDrawing extends JPanel implements Drawing {
      * @param arc Arc to draw.
      * @param palette Palette to use to retrieve color and width for arc, or null to
      *        use current settings.
+     * @param repaint .
      */
     protected void drawArc(Arc arc, GraphPalette palette, boolean repaint) {
         List<Point> pts = arc.getPoints();
@@ -609,7 +610,7 @@ public class BasicDrawing extends JPanel implements Drawing {
     /**
      * Initialize the drawing for the given graph.
      * 
-     * @param graph
+     * @param graph .
      */
     protected void initialize(Graph graph) {
 

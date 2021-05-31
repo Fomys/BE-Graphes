@@ -52,4 +52,10 @@ class ArcBackward extends Arc {
         return pts;
     }
 
+    @Override
+    public String toString() {
+        return "ArcBackward{" +
+                "originalArc=" + originalArc +
+                '}';
+    }
 }

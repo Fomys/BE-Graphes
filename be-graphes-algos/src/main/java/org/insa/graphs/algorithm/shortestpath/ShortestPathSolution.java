@@ -5,6 +5,8 @@ import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Path;
 import org.insa.graphs.algorithm.AbstractSolution;
 
+import java.util.Objects;
+
 public class ShortestPathSolution extends AbstractSolution {
 
     // Optimal solution.
@@ -68,7 +70,20 @@ public class ShortestPathSolution extends AbstractSolution {
             }
         }
         info += " in " + getSolvingTime().getSeconds() + " seconds.";
+        info += " " + this.path.getArcs();
         return info;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShortestPathSolution that = (ShortestPathSolution) o;
+        return Objects.equals(getPath(), that.getPath());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPath());
+    }
 }

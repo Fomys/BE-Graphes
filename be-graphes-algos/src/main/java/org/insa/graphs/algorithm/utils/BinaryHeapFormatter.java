@@ -68,7 +68,7 @@ public class BinaryHeapFormatter {
         /**
          * Creates a new context by appending a branch to this context.
          * 
-         * @param n     Number of spaces to add to the margin, or {@code null} to use
+         * @param count Number of spaces to add to the margin, or {@code null} to use
          *              the length of the string.
          * @param label Name of the branch.
          * 

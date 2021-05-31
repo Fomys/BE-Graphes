@@ -12,17 +12,18 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 
     @Override
     protected Label createLabel(Node node) {
-        double distance = this.getInputData().getDestination().getPoint().distanceTo(node.getPoint());
+        Node destination = this.getInputData().getDestination();
+        double distance = destination.getPoint().distanceTo(node.getPoint());
         double cost;
         if(this.data.getMode() == AbstractInputData.Mode.LENGTH) {
             cost = distance;
         } else {
             // (this.data.getMode() == AbstractInputData.Mode.TIME)
             double max_speed;
-            if(this.data.getMaximumSpeed() != GraphStatistics.NO_MAXIMUM_SPEED) {
-                max_speed = this.data.getMaximumSpeed();
+            if(this.data.getMaximumSpeed() == GraphStatistics.NO_MAXIMUM_SPEED) {
+                max_speed = this.getInputData().getGraph().getGraphInformation().getMaximumSpeed();
             } else {
-                max_speed = this.data.getGraph().getGraphInformation().getMaximumSpeed();
+                max_speed = this.getInputData().getMaximumSpeed();
             }
             cost = distance*3.6 / max_speed;
         }
